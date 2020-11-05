@@ -1,0 +1,11 @@
+.control{
+	display: flex;
+	padding: 15px;
+}
+.modeList {
+	color: grey;
+}
+.control > button {
+	width: 250px;
+	cursor: pointer;
+}
