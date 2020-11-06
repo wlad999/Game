@@ -6,22 +6,41 @@ import {
 } from "../../../services";
 
 const GameSquare = ({ currentMode, play }) => {
-  const [count, setCount] = useState(2);
+  const [mode, setMode] = useState(currentMode);
   const [squareData, setSquareData] = useState([]);
+  const [idIntarval, setIdIntarval] = useState(null);
+  const [idTimeOut, setIdTimeOut] = useState(null);
 
-  //  useEffect(() => {
-  //    const { field: setCarentCount } = currentMode;
-  //    setCount(setCarentCount);
-  //  }, [currentMode]);
+  //console.log("idTimeOut", idTimeOut);
 
   useEffect(() => {
-    const squareArr = squareArrCreator(count);
+    setMode(currentMode);
+  }, [currentMode]);
+
+  useEffect(() => {
+    const squareArr = squareArrCreator(mode.field);
     setSquareData(squareArr);
-  }, [count]);
+    clearTimeout(idTimeOut);
+    clearInterval(idIntarval);
+  }, [mode]);
 
-  const square = squareCreationFunc({ squareData, setSquareData, count });
+  const square = squareCreationFunc({
+    squareData,
+    setSquareData,
+    count: mode.field,
+  });
   useEffect(() => {
-    play && playFunc({ count, squareData, setSquareData });
+    !play && clearInterval(idIntarval) && clearTimeout(idTimeOut);
+    play &&
+      setIdIntarval(
+        setInterval(playFunc, mode.delay, {
+          count: mode.field,
+          setSquareData,
+          delay: mode.delay,
+          idTimeOut,
+          setIdTimeOut,
+        })
+      );
   }, [play]);
 
   return <div>{square}</div>;

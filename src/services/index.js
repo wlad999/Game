@@ -1,4 +1,3 @@
-import { purple } from "@material-ui/core/colors";
 import shortid from "shortid";
 
 export function squareArrCreator(count) {
@@ -12,6 +11,7 @@ export function squareArrCreator(count) {
 }
 
 export function squareCreationFunc({ squareData, setSquareData, count }) {
+  //console.log("squareCreationFunc", squareData);
   return squareData.map((line) => {
     return (
       <div
@@ -45,8 +45,8 @@ export function squareCreationFunc({ squareData, setSquareData, count }) {
 export function clickHandler({ id, squareData, setSquareData }) {
   const newSquareData = squareData.map((line) =>
     line.map((el) => {
-      if (el.id === id) {
-        return { ...el, color: "coral" };
+      if (el.id === id && el.color === "#42D8E8") {
+        return { ...el, color: "#00E871" };
       }
       return el;
     })
@@ -54,23 +54,42 @@ export function clickHandler({ id, squareData, setSquareData }) {
   setSquareData(newSquareData);
 }
 
-export function playFunc({ count, squareData, setSquareData }) {
-  console.log("playFunc");
-  const randomNum = Math.ceil(Math.random() * (count * count));
+export function playFunc({
+  count,
+  setSquareData,
+  delay,
+  idTimeOut,
+  setIdTimeOut,
+}) {
+  let randomNum = Math.ceil(Math.random() * (count * count));
+  //console.log("START FUNC");
 
-  if (squareData.length) {
-    const plaingSquare = squareData.map((line) =>
+  setSquareData((squareData) =>
+    squareData.map((line) =>
       line.map((el) => {
-        if (el.id === randomNum) {
-          return { ...el, color: "purple" };
+        //if (el.color && el.id < count * count) {
+        //  randomNum = randomNum + 1;
+        //}
+        if (el.id === randomNum && !el.color) {
+          return { ...el, color: "#42D8E8" };
         }
         return el;
       })
-    );
-    setSquareData(plaingSquare);
-    console.log("plaingSquare", plaingSquare);
-  }
-
-  //  setSquareData(plaingSquare);
-  console.log("squareData", squareData.length);
+    )
+  );
+  setIdTimeOut(
+    setTimeout(() => {
+      setSquareData((squareData) =>
+        squareData.map((line) =>
+          line.map((el) => {
+            if (el.id === randomNum && el.color !== "#00E871") {
+              return { ...el, color: "#E85A5F" };
+            }
+            return el;
+          })
+        )
+      );
+      clearTimeout(idTimeOut);
+    }, delay)
+  );
 }

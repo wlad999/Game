@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const Control = ({ renderMode, setPlay }) => {
+const Control = ({ renderMode, setPlayToggle }) => {
   return (
     <div className="control">
       <div className="modeList">{renderMode}</div>
-      <button onClick={() => setPlay(true)}>PLAY</button>
+      <button onClick={setPlayToggle}>PLAY</button>
     </div>
   );
 };

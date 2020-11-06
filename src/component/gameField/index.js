@@ -6,7 +6,7 @@ import Control from "./control";
 
 const GameField = ({ gameMode }) => {
   const [currentMode, setCurrentMode] = useState(gameMode.easyMode);
-  const [play, setPlay] = useState(true);
+  const [play, setPlay] = useState(false);
   const setPropsPlay = () => {
     setPlay((play) => !play);
   };
@@ -26,7 +26,7 @@ const GameField = ({ gameMode }) => {
 
   return (
     <div className="gameFieldContainer">
-      <Control renderMode={renderMode} setPlay={setPropsPlay} />
+      <Control renderMode={renderMode} setPlayToggle={setPropsPlay} />
       <GameSquare currentMode={currentMode} play={play} />
     </div>
   );
