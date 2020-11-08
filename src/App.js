@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import GameField from "./component/gameField";
 import LeaderBoard from "./component/leaderBoard";
-import shortid from "shortid";
+import { leaderListFunc } from "./services";
+import "./App.css";
 
 const defaultMode = {
   easyMode: { field: 5, delay: 2000 },
@@ -12,7 +12,8 @@ const defaultMode = {
 
 function App() {
   const [gameMode, setGameMode] = useState(defaultMode);
-  const [leaderList, setLeaderList] = useState([]);
+  const [leadersArr, setLeaderList] = useState([]);
+
   useEffect(() => {
     fetch("https://starnavi-frontend-test-task.herokuapp.com/winners")
       .then((data) => data.json())
@@ -27,14 +28,7 @@ function App() {
       .catch(setGameMode(defaultMode));
   }, []);
 
-  const leadersList =
-    leaderList.length &&
-    [...leaderList].reverse().map((el) => (
-      <li key={shortid()} className="line">
-        <span className="winner">{el.winner}</span>
-        {el.date}
-      </li>
-    ));
+  const leadersList = leaderListFunc({ leadersArr });
 
   return (
     <div className="App">

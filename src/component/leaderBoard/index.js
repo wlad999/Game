@@ -3,7 +3,7 @@ import "./index.css";
 
 const LeaderBoard = ({ list }) => {
   return (
-    <div className="leaderFieldContainer">
+    <div className="leaderContainer">
       <span>Leader Board</span>
       <ul>{list ? list : "Some problem with getting leaders list"}</ul>
     </div>

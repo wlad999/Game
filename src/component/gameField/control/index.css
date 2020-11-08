@@ -1,9 +1,10 @@
-.control{
+.control {
 	display: flex;
 	margin-bottom: 16px;
 	width: 36vw;
 	justify-content: space-between;
 }
+
 .modeList {
 	color:#86979D;
 	width: 30%;
@@ -28,6 +29,7 @@ select {
 	border-radius: 5px;
 	padding-left: 10px;
 }
+
 input {
 	width: 30%;
 	background: #F3F3F3;
@@ -37,6 +39,7 @@ input {
 	color:#86979D;
 	
 }
+
 ::-webkit-input-placeholder {color:#86979D;};
 ::-moz-placeholder          {color:#86979D;}/* Firefox 19+ */;
 :-moz-placeholder           {color:#86979D;}/* Firefox 18- */;

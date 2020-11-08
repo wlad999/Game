@@ -1,4 +1,4 @@
-.leaderFieldContainer{
+.leaderContainer {
 	width: 50%;
 	outline: 3px solid #EEEEEE;
 	display: flex;
@@ -7,7 +7,7 @@
 	padding-top:10vh;
 }
 
-.leaderFieldContainer > span {
+.leaderContainer > span {
 	height: 30px;
 	color: #8A8A8A;
 	margin-bottom:16px;
@@ -18,7 +18,7 @@
 	margin-left: 7vw;
 }
 
-.leaderFieldContainer > ul {
+.leaderContainer > ul {
 	overflow: auto;
 	height: 36vw;
 	padding: 0;
@@ -27,7 +27,7 @@
 	margin: 0;
 }
 
-.leaderFieldContainer > ul > li {
+.leaderContainer > ul > li {
 	margin-bottom: 5px;
 	padding-left: 15px;
 	background: #CFD8DC;
@@ -39,6 +39,6 @@
 	font-size: 20px;
 }
 
-.leaderFieldContainer ul > li > span {
+.leaderContainer ul > li > span {
 	width: 150px;
 }	

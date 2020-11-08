@@ -1,4 +1,4 @@
-.gameFieldContainer{
+.gameFieldContainer {
 	width: 50%;
 	outline: 3px solid #EEEEEE;
 	display: flex;
@@ -6,7 +6,8 @@
 	align-items: center;
 	padding-top:10vh;
 }
-.gameFieldContainer >h2 {
+
+.gameFieldContainer > h2 {
 	color:  #8A8A8A;
 	text-align: center	;
 	margin: 5px 0;
