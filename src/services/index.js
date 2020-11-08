@@ -1,95 +1,193 @@
-import shortid from "shortid";
+import { dataToSendFunc, selectModeFunc } from "./controlService";
+import {
+  defaultArrCreator,
+  squareCreationFunc,
+  playFunc,
+} from "./squareService";
+export {
+  dataToSendFunc,
+  selectModeFunc,
+  defaultArrCreator,
+  squareCreationFunc,
+  playFunc,
+};
 
-export function squareArrCreator(count) {
-  const oneLineArr = (lineIdx) =>
-    new Array(count).fill().map((_, squareIdx) => ({
-      id: lineIdx * count + 1 + squareIdx,
-      color: null,
-    }));
+//export function defaultArrCreator(count) {
+//  const oneLineArr = (lineIdx) =>
+//    new Array(count).fill().map((_, squareIdx) => ({
+//      id: lineIdx * count + 1 + squareIdx,
+//      color: null,
+//    }));
 
-  return new Array(count).fill().map((_, lineIdx) => oneLineArr(lineIdx));
-}
+//  return new Array(count).fill().map((_, lineIdx) => oneLineArr(lineIdx));
+//}
 
-export function squareCreationFunc({ squareData, setSquareData, count }) {
-  //console.log("squareCreationFunc", squareData);
-  return squareData.map((line) => {
-    return (
-      <div
-        style={{ display: "flex", justifyContent: "center" }}
-        key={shortid()}
-      >
-        {line.map((el, idx) => {
-          return (
-            <div
-              style={{
-                width: `calc(40vw/${count})`,
-                height: `calc(40vw/${count})`,
-                outline: "1px solid black",
-                background: `${el.color}`,
-                cursor: "pointer",
-              }}
-              key={shortid()}
-              onClick={() =>
-                clickHandler({ id: el.id, squareData, setSquareData })
-              }
-            >
-              {el.id}
-            </div>
-          );
-        })}
-      </div>
-    );
-  });
-}
+//export function squareCreationFunc({
+//  squareData,
+//  setSquareData,
+//  count,
+//  setWinner,
+//}) {
+//  let compWin = 0;
+//  let playerWin = 0;
+//  let totalNumber = count * count;
+//  let winner = null;
 
-export function clickHandler({ id, squareData, setSquareData }) {
-  const newSquareData = squareData.map((line) =>
-    line.map((el) => {
-      if (el.id === id && el.color === "#42D8E8") {
-        return { ...el, color: "#00E871" };
-      }
-      return el;
-    })
-  );
-  setSquareData(newSquareData);
-}
+//  return squareData.map((line) => {
+//    return (
+//      <div
+//        style={{ display: "flex", justifyContent: "center" }}
+//        key={shortid()}
+//      >
+//        {line.map((el) => {
+//          if (el.color === "#00E871") {
+//            playerWin = playerWin + 1;
+//          }
+//          if (el.color === "#E85A5F") {
+//            compWin = compWin + 1;
+//          }
+//          if (playerWin / totalNumber > 0.5) {
+//            winner = "User";
+//            setWinner(winner);
+//          }
+//          if (compWin / totalNumber > 0.5) {
+//            winner = "Computer";
+//            setWinner(winner);
+//          }
 
-export function playFunc({
-  count,
-  setSquareData,
-  delay,
-  idTimeOut,
-  setIdTimeOut,
-}) {
-  let randomNum = Math.ceil(Math.random() * (count * count));
-  //console.log("START FUNC");
+//          return (
+//            <div
+//              style={{
+//                width: `calc(36vw/${count})`,
+//                height: `calc(36vw/${count})`,
+//                outline: "2px solid #EFEFF1",
+//                background: `${el.color}`,
+//                cursor: "pointer",
+//              }}
+//              key={shortid()}
+//              onClick={() =>
+//                clickHandler({ id: el.id, squareData, setSquareData })
+//              }
+//            >
+//              {el.id}
+//            </div>
+//          );
+//        })}
+//      </div>
+//    );
+//  });
+//}
 
-  setSquareData((squareData) =>
-    squareData.map((line) =>
-      line.map((el) => {
-        //if (el.color && el.id < count * count) {
-        //  randomNum = randomNum + 1;
-        //}
-        if (el.id === randomNum && !el.color) {
-          return { ...el, color: "#42D8E8" };
-        }
-        return el;
-      })
-    )
-  );
-  setIdTimeOut(
-    setTimeout(() => {
-      setSquareData((squareData) =>
-        squareData.map((line) =>
-          line.map((el) => {
-            if (el.id === randomNum && el.color !== "#00E871") {
-              return { ...el, color: "#E85A5F" };
-            }
-            return el;
-          })
-        )
-      );
-      clearTimeout(idTimeOut);
-    }, delay)
-  );
-}
+//export function clickHandler({ id, squareData, setSquareData }) {
+//  const newSquareData = squareData.map((line) =>
+//    line.map((el) => {
+//      if (el.id === id && el.color === "#42D8E8") {
+//        return { ...el, color: "#00E871" };
+//      }
+//      return el;
+//    })
+//  );
+//  setSquareData(newSquareData);
+//}
+
+//export function randomNumCreator({ squareData, count }) {
+//  let num;
+//  while (!num && squareData.length) {
+//    let tryNum = Math.ceil(Math.random() * (count * count));
+
+//    squareData.map((line) =>
+//      line.map((el) => {
+//        if (el.id === tryNum && !el.color) {
+//          num = tryNum;
+//        }
+//      })
+//    );
+//  }
+
+//  return num;
+//}
+
+//export function playFunc({
+//  count,
+//  setSquareData,
+//  delay,
+//  idTimeOut,
+//  setIdTimeOut,
+//}) {
+//  let randomNum;
+//  setSquareData((squareData) => {
+//    randomNum = randomNumCreator({ squareData, count });
+
+//    //console.log("randomNum", randomNum);
+//    return squareData.map((line) =>
+//      line.map((el) => {
+//        if (el.id === randomNum) {
+//          //console.log("el", el.id);
+//          return { ...el, color: "#42D8E8" };
+//        }
+//        return el;
+//      })
+//    );
+//  });
+//  setIdTimeOut(
+//    setTimeout(() => {
+//      setSquareData((squareData) =>
+//        squareData.map((line) =>
+//          line.map((el) => {
+//            if (el.id === randomNum && el.color === "#42D8E8") {
+//              return { ...el, color: "#E85A5F" };
+//            }
+//            return el;
+//          })
+//        )
+//      );
+//      clearTimeout(idTimeOut);
+//    }, delay)
+//  );
+//}
+
+//export function dataToSendFunc({ winner, name }) {
+//  const newDate = new Date();
+//  const dateString = `${newDate
+//    .toLocaleTimeString()
+//    .slice(0, -3)}; ${newDate
+//    .toLocaleDateString()
+//    .slice(0, -8)} ${newDate.toLocaleString("en", {
+//    month: "long",
+//  })} ${newDate.getFullYear()}`;
+
+//  const data = {
+//    winner: name ? name.slice(0, 12) : winner,
+//    date: dateString,
+//  };
+//  return data;
+//}
+
+//export function selectModeFunc({ gameMode, setCurrentMode }) {
+//  const modeList = Object.keys(gameMode);
+
+//  const renderMode = (
+//    <select
+//      id="select"
+//      value="Pick game mode"
+//      onChange={(e) =>
+//        setCurrentMode({
+//          level: e.target.value,
+//          ...gameMode[e.target.value],
+//        })
+//      }
+//    >
+//      <option disabled style={{ display: "none" }}>
+//        Pick game mode
+//      </option>
+//      {modeList.map((level) => {
+//        return (
+//          <option value={level} key={shortid()}>
+//            {level}
+//          </option>
+//        );
+//      })}
+//    </select>
+//  );
+//  return renderMode;
+//}

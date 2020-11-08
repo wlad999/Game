@@ -1,36 +1,49 @@
 import React, { useEffect, useState } from "react";
 import {
-  squareArrCreator,
+  defaultArrCreator,
   squareCreationFunc,
   playFunc,
 } from "../../../services";
 
-const GameSquare = ({ currentMode, play }) => {
+const GameSquare = ({ currentMode, play, setWinner }) => {
   const [mode, setMode] = useState(currentMode);
   const [squareData, setSquareData] = useState([]);
   const [idIntarval, setIdIntarval] = useState(null);
   const [idTimeOut, setIdTimeOut] = useState(null);
-
-  //console.log("idTimeOut", idTimeOut);
+  const [showSquare, setShowSquare] = useState(null);
 
   useEffect(() => {
     setMode(currentMode);
   }, [currentMode]);
 
   useEffect(() => {
-    const squareArr = squareArrCreator(mode.field);
+    const squareArr = defaultArrCreator(mode.field);
     setSquareData(squareArr);
     clearTimeout(idTimeOut);
     clearInterval(idIntarval);
   }, [mode]);
 
-  const square = squareCreationFunc({
-    squareData,
-    setSquareData,
-    count: mode.field,
-  });
   useEffect(() => {
-    !play && clearInterval(idIntarval) && clearTimeout(idTimeOut);
+    const square = squareCreationFunc({
+      squareData,
+      setSquareData,
+      count: mode.field,
+      setWinner,
+    });
+    setShowSquare(square);
+  }, [squareData]);
+
+  useEffect(() => {
+    if (!play) {
+      clearInterval(idIntarval);
+      clearTimeout(idTimeOut);
+    }
+    if (play) {
+      setWinner(null);
+      const squareArr = defaultArrCreator(mode.field);
+      setSquareData(squareArr);
+    }
+
     play &&
       setIdIntarval(
         setInterval(playFunc, mode.delay, {
@@ -43,7 +56,7 @@ const GameSquare = ({ currentMode, play }) => {
       );
   }, [play]);
 
-  return <div>{square}</div>;
+  return <div>{showSquare}</div>;
 };
 
 export default GameSquare;

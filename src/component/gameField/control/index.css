@@ -1,11 +1,43 @@
 .control{
 	display: flex;
-	padding: 15px;
+	margin-bottom: 16px;
+	width: 36vw;
+	justify-content: space-between;
 }
 .modeList {
-	color: grey;
+	color:#86979D;
+	width: 30%;
+	
 }
 .control > button {
 	width: 250px;
 	cursor: pointer;
+	width: 30%;
+	color:#F3F3F3;
+	border: none;
+	border-radius: 5px;
+	background: #7B8D93;
 }
+
+select {
+	background: #CFD8DC;
+	color:#86979D;
+	height: 30px;
+	width: 100%;
+	border: none;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+input {
+	width: 30%;
+	background: #F3F3F3;
+	border: none;
+	border-radius: 5px;
+	padding-left: 10px;
+	color:#86979D;
+	
+}
+::-webkit-input-placeholder {color:#86979D;};
+::-moz-placeholder          {color:#86979D;}/* Firefox 19+ */;
+:-moz-placeholder           {color:#86979D;}/* Firefox 18- */;
+:-ms-input-placeholder      {color:#86979D;};

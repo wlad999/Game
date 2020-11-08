@@ -1,14 +1,5 @@
 .App {
   display: flex;
   justify-content: center;
-}
-.App :first-child {
-  /*width: 50%;
-  border: 3px solid #EEEEEE;*/
-  /*height: 100vh;*/
-}
-.App :nth-child(2) {
-  /*width: 50%;
-  border: 3px solid #EEEEEE;*/
-  /*height: 100vh;*/
+  height: 100vh;
 }

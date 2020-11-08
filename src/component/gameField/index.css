@@ -1,6 +1,15 @@
 .gameFieldContainer{
 	width: 50%;
 	outline: 3px solid #EEEEEE;
-	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top:10vh;
 	
 }
+.gameFieldContainer >h2 {
+	color:  #8A8A8A;
+	text-align: center	;
+	margin: 5px 0;
+}
+
