@@ -56,9 +56,7 @@ export function squareCreationFunc({
               onClick={() =>
                 clickHandler({ id: el.id, squareData, setSquareData })
               }
-            >
-              {el.id}
-            </div>
+            ></div>
           );
         })}
       </div>
@@ -106,11 +104,9 @@ export function playFunc({
   setSquareData((squareData) => {
     randomNum = randomNumCreator({ squareData, count });
 
-    //console.log("randomNum", randomNum);
     return squareData.map((line) =>
       line.map((el) => {
         if (el.id === randomNum) {
-          //console.log("el", el.id);
           return { ...el, color: "#42D8E8" };
         }
         return el;
